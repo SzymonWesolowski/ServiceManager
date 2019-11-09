@@ -1,4 +1,4 @@
-﻿namespace ServiceManager.Domain
+﻿namespace ServiceManager.Domain.Model
 {
     public enum DeviceType
     {
