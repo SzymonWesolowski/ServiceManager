@@ -1,6 +1,6 @@
 ﻿namespace ServiceManager.Domain.Model
 {
-    public enum City
+    public enum CityEnum
     {
         Warszawa,
         Gdańsk,

@@ -9,11 +9,11 @@ namespace ServiceManager.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var repair = new RepairProtocol("Szym", new DateTime(2019, 10, 10), City.Gdańsk, DeviceType.CL542,
+            var repair = new RepairProtocol("Szym", new DateTime(2019, 10, 10), CityEnum.Gdańsk, DeviceTypeEnum.CL542,
                 "Chmielna", "123", true, string.Empty, null);
-            var inspection = new InspectionProtocol("Szym", new DateTime(2019, 10, 10), City.Gdańsk, DeviceType.CL542,
+            var inspection = new InspectionProtocol("Szym", new DateTime(2019, 10, 10), CityEnum.Gdańsk, DeviceTypeEnum.CL542,
                 "Chmielna", "123", true, string.Empty, null);
-            var renovation = new RenovationProtocol("Szym", new DateTime(2019, 10, 10), City.Gdańsk, DeviceType.CL542,
+            var renovation = new RenovationProtocol("Szym", new DateTime(2019, 10, 10), CityEnum.Gdańsk, DeviceTypeEnum.CL542,
                 "Chmielna", "123", true, string.Empty, null);
             var inspectionGenerator = new InspectionProtocolGenerator();
             var repairGenerator = new RepairProtocolGenerator();
