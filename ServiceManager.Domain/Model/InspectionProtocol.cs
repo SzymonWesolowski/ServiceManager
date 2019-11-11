@@ -9,10 +9,8 @@ namespace ServiceManager.Domain.Model
             bool isPositive, string recommendations, List<string> partsToBeReplaced, string causeOfFailure, string repairDescription) : base(estate, device, serviceman,
             protocolDate, isPositive, recommendations, partsToBeReplaced)
         {
-            CauseOfFailure = causeOfFailure;
-            RepairDescription = repairDescription;
+
         }
-        public string CauseOfFailure { get; }
-        public string RepairDescription { get; }
+
     }
 }
