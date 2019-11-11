@@ -5,11 +5,14 @@ namespace ServiceManager.Domain.Model
 {
     public class InspectionProtocol : Protocol
     {
-        public InspectionProtocol(string servicemanName, DateTime protocolDate, CityEnum city, DeviceTypeEnum device,
-            string address, string serialNumber, bool isPositive, string recommendations,
-            List<string> partsToBeReplaced) : base(servicemanName, protocolDate, city,
-            device, address, serialNumber, isPositive, recommendations, partsToBeReplaced)
+        public InspectionProtocol(Estate estate, Device device, Serviceman serviceman, DateTime protocolDate,
+            bool isPositive, string recommendations, List<string> partsToBeReplaced, string causeOfFailure, string repairDescription) : base(estate, device, serviceman,
+            protocolDate, isPositive, recommendations, partsToBeReplaced)
         {
+            CauseOfFailure = causeOfFailure;
+            RepairDescription = repairDescription;
         }
+        public string CauseOfFailure { get; }
+        public string RepairDescription { get; }
     }
 }
