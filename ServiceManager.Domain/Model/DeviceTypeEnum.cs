@@ -1,6 +1,6 @@
 ﻿namespace ServiceManager.Domain.Model
 {
-    public enum DeviceTypeEnum
+/*    public enum DeviceTypeEnum
     {
         PL313,
         PL340,
@@ -14,5 +14,5 @@
         CL552,
         CL542,
         CL543,
-    }
+    }*/
 }

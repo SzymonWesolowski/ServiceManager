@@ -6,7 +6,8 @@ namespace ServiceManager.Domain.Model
 {
     public class Device
     {
-        public Device(DeviceTypeEnum deviceType, int parkPlaces, List<string> parkPlacesNumbers, string deviceSerialNumber, DateTime productionYear, Estate estate)
+        public Device(string deviceType, int parkPlaces, List<string> parkPlacesNumbers, string deviceSerialNumber,
+            DateTime productionYear, Estate estate)
         {
             DeviceType = deviceType;
             ParkPlaces = parkPlaces;
@@ -16,12 +17,11 @@ namespace ServiceManager.Domain.Model
             Estate = estate;
         }
 
-        public DeviceTypeEnum DeviceType { get; }
+        public string DeviceType { get; }
         public int ParkPlaces { get; }
         public List<string> ParkPlacesNumbers { get; }
         public string DeviceSerialNumber { get; }
         public DateTime ProductionYear { get; }
         public Estate Estate { get; }
-
     }
 }
