@@ -3,7 +3,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    interface IEstateRepository
+    public interface IEstateRepository
     {
         void AddEstate(Estate estate);
         List<Estate> GetEstateList();
