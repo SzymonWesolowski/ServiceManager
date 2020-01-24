@@ -7,7 +7,7 @@ namespace ServiceManager.Application
 {
     internal interface IServicemanOperations
     {
-        void AddServiceman(string firstName, string lastName, string permissionNumber);
+        void AddServiceman(string firstName, string lastName, string permissionNumber, Guid servicemanId);
         List<Serviceman> GetServicemanList();
         void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman);
         void DeleteServiceman(Serviceman serviceman);
@@ -22,9 +22,9 @@ namespace ServiceManager.Application
             _servicemanRepository = servicemanRepository;
         }
 
-        public void AddServiceman(string firstName, string lastName, string permissionNumber)
+        public void AddServiceman(string firstName, string lastName, string permissionNumber, Guid servicemanId)
         {
-            var serviceman = new Serviceman(firstName, lastName, permissionNumber);
+            var serviceman = new Serviceman(firstName, lastName, permissionNumber, servicemanId);
             _servicemanRepository.AddServiceman(serviceman);
         }
 

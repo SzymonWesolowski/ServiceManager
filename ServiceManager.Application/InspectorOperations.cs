@@ -7,7 +7,7 @@ namespace ServiceManager.Application
 {
     internal interface IInspectorOperations
     {
-        void AddInspector(string firstName, string lastName, string city, string phoneNumber);
+        void AddInspector(string firstName, string lastName, string city, string phoneNumber, Guid inspectorId);
         List<Inspector> GeInspectorList();
         void ModifyInspector(Inspector oldInspector, Inspector newInspector);
         void RemoveInspector(Inspector inspector);
@@ -22,9 +22,9 @@ namespace ServiceManager.Application
         {
             _inspectorRepository = inspectorRepository;
         }
-        public void AddInspector(string firstName, string lastName, string city, string phoneNumber)
+        public void AddInspector(string firstName, string lastName, string city, string phoneNumber, Guid inspectorId)
         {
-            var inspector = new Inspector(firstName, lastName, city, phoneNumber);
+            var inspector = new Inspector(firstName, lastName, city, phoneNumber, inspectorId);
             _inspectorRepository.AddInspector(inspector);
         }
 

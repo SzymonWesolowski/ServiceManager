@@ -15,7 +15,7 @@ namespace ServiceManager.PdfCreator
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
             PdfFont font = PdfFontFactory.CreateFont(@"C:\Fonts\arial.ttf", "cp1250", true);
-            Text text = new Text("Repair Protocol" + protocol.Estate.City + ", " + protocol.Estate.Street).SetFont(font);
+            Text text = new Text("Repair Protocol").SetFont(font);
             document.Add(new Paragraph().Add(text));
             document.Close();
         }

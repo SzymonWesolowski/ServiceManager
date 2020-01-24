@@ -5,22 +5,23 @@ namespace ServiceManager.Domain.Model
 {
     public abstract class Protocol
     {
-        protected Protocol(Estate estate, Device device, Serviceman serviceman, DateTime protocolDate, bool isPositive, string recommendations, List<string> partsToBeReplaced)
+        protected Protocol(Guid estateId, Guid servicemanId, DateTime protocolDate, bool isPositive,
+            string recommendations, List<string> partsToBeReplaced, string deviceSerialNumber)
         {
-            Estate = estate;
-            Device = device;
-            Serviceman = serviceman;
+            EstateId = estateId;
+            ServicemanId = servicemanId;
             ProtocolDate = protocolDate;
             IsPositive = isPositive;
             Recommendations = recommendations;
             PartsToBeReplaced = partsToBeReplaced;
+            DeviceSerialNumber = deviceSerialNumber;
         }
 
 
-        public Serviceman Serviceman { get; }
+        public Guid ServicemanId { get; }
         public DateTime ProtocolDate { get; }
-        public Estate Estate { get; }
-        public Device Device { get; }
+        public Guid EstateId { get; }
+        public string DeviceSerialNumber { get; }
         public bool IsPositive { get; }
         public string Recommendations { get; }
         public List<string> PartsToBeReplaced { get; }

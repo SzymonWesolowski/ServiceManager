@@ -3,7 +3,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IDeviceRepository
+    public interface IDeviceRepository
     {
         void AddDevice(Device device);
         List<Device> GetDevices(Estate estate);

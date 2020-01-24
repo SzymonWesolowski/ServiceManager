@@ -7,14 +7,15 @@ namespace ServiceManager.Domain.Model
     public class Device
     {
         public Device(string deviceType, int parkPlaces, List<string> parkPlacesNumbers, string deviceSerialNumber,
-            DateTime productionYear, Estate estate)
+            DateTime productionYear, Guid estateId, Guid deviceId)
         {
             DeviceType = deviceType;
             ParkPlaces = parkPlaces;
             ParkPlacesNumbers = parkPlacesNumbers;
             DeviceSerialNumber = deviceSerialNumber;
             ProductionYear = productionYear;
-            Estate = estate;
+            EstateId = estateId;
+            DeviceId = deviceId;
         }
 
         public string DeviceType { get; }
@@ -22,6 +23,7 @@ namespace ServiceManager.Domain.Model
         public List<string> ParkPlacesNumbers { get; }
         public string DeviceSerialNumber { get; }
         public DateTime ProductionYear { get; }
-        public Estate Estate { get; }
+        public Guid EstateId { get; }
+        public Guid DeviceId { get; }
     }
 }

@@ -5,13 +5,14 @@ namespace ServiceManager.Domain.Model
 {
     public class RenovationProtocol : Protocol
     {
-        public RenovationProtocol(Estate estate, Device device, Serviceman serviceman, DateTime protocolDate,
-            bool isPositive, string recommendations, List<string> partsToBeReplaced, List<string> partsReplaced) : base(estate, device, serviceman,
-            protocolDate, isPositive, recommendations, partsToBeReplaced)
+        public RenovationProtocol(Guid estateId, Guid servicemanId, DateTime protocolDate, bool isPositive,
+            string recommendations, List<string> partsToBeReplaced, string deviceSerialNumber,
+            List<string> partsReplaced) : base(estateId,
+            servicemanId, protocolDate, isPositive, recommendations, partsToBeReplaced, deviceSerialNumber)
         {
             PartsReplaced = partsReplaced;
         }
+
         public List<string> PartsReplaced { get; }
-       
     }
 }

@@ -8,8 +8,8 @@ namespace ServiceManager.Application
     internal interface IEstateOperations
     {
         List<Estate> GetEstateList();
-        void AddEstate(string name, string city, string street, string postCode, Inspector inspector,
-            bool underContract, DateTime lastInspectionDate);
+        void AddEstate(string name, string city, string street, string postCode, 
+            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId);
 
         void ModifyEstate(Estate oldEstate, Estate newEstate);
         void DeleteEstate(Estate estate);
@@ -30,10 +30,10 @@ namespace ServiceManager.Application
             return _estateRepository.GetEstateList();
         }
 
-        public void AddEstate(string name, string city, string street, string postCode, Inspector inspector,
-            bool underContract, DateTime lastInspectionDate)
+        public void AddEstate(string name, string city, string street, string postCode,
+            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId)
         {
-            Estate estate = new Estate(name, city, street, postCode, inspector, underContract, lastInspectionDate);
+            Estate estate = new Estate(name, city, street, postCode, underContract, lastInspectionDate, estateId, inspectorId);
             _estateRepository.AddEstate(estate);
         }
 
