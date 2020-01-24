@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ServiceManager.Application;
+using ServiceManager.Application.RepositoryInterfaces;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
@@ -13,7 +14,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceContext())
             {
-                context.Estates.Add(modelToDto(estate));
+                context.Estates.Add(ModelToDto(estate));
                 context.SaveChanges();
             }
         }
@@ -38,7 +39,7 @@ namespace ServiceManager.Persistence
             using (var context = new ServiceContext())
             {
                 var estate = context.Estates.SingleOrDefault(e => e.EstateId == oldEstate.EstateId);
-                context.Entry(estate).CurrentValues.SetValues(modelToDto(newEstate));
+                context.Entry(estate).CurrentValues.SetValues(ModelToDto(newEstate));
                 context.SaveChanges();
             }
         }
@@ -54,17 +55,19 @@ namespace ServiceManager.Persistence
             }
         }
 
-        private EstateDbDto modelToDto(Estate estate)
+        private EstateDbDto ModelToDto(Estate estate)
         {
-            var estateDbDto = new EstateDbDto();
-            estateDbDto.EstateId = estate.EstateId;
-            estateDbDto.City = estate.City;
-            estateDbDto.InspectorId = estate.InspectorId;
-            estateDbDto.LastInspectionDate = estate.LastInspectionDate;
-            estateDbDto.Name = estate.Name;
-            estateDbDto.PostCode = estate.PostCode;
-            estateDbDto.Street = estate.Street;
-            estateDbDto.UnderContract = estate.UnderContract;
+            var estateDbDto = new EstateDbDto
+            {
+                EstateId = estate.EstateId,
+                City = estate.City,
+                InspectorId = estate.InspectorId,
+                LastInspectionDate = estate.LastInspectionDate,
+                Name = estate.Name,
+                PostCode = estate.PostCode,
+                Street = estate.Street,
+                UnderContract = estate.UnderContract
+            };
             return estateDbDto;
         }
 

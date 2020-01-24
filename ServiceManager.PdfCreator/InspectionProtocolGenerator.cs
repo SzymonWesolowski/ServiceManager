@@ -4,6 +4,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using ServiceManager.Application;
+using ServiceManager.Application.PdfGeneratorInterfaces;
 using ServiceManager.Domain;
 using ServiceManager.Domain.Model;
 

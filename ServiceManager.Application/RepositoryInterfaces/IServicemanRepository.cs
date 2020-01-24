@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
-namespace ServiceManager.Application
+namespace ServiceManager.Application.RepositoryInterfaces
 {
-    internal interface IServicemanRepository
+    public interface IServicemanRepository
     {
         void AddServiceman(Serviceman serviceman);
         List<Serviceman> GetServicemanList();

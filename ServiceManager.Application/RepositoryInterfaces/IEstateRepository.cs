@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
-namespace ServiceManager.Application
+namespace ServiceManager.Application.RepositoryInterfaces
 {
     public interface IEstateRepository
     {

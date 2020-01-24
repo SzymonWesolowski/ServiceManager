@@ -1,4 +1,5 @@
 ﻿using ServiceManager.Application;
+using ServiceManager.Application.PdfGeneratorInterfaces;
 using StructureMap;
 
 namespace ServiceManager.PdfCreator

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ServiceManager.Application.RepositoryInterfaces;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application

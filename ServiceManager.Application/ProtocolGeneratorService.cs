@@ -1,4 +1,5 @@
-﻿using ServiceManager.Domain.Model;
+﻿using ServiceManager.Application.PdfGeneratorInterfaces;
+using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {

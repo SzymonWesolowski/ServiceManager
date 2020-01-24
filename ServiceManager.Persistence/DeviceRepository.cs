@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ServiceManager.Application;
+using ServiceManager.Application.RepositoryInterfaces;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence

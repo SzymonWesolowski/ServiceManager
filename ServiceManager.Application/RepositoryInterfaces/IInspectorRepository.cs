@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
-namespace ServiceManager.Application
+namespace ServiceManager.Application.RepositoryInterfaces
 {
-    internal interface IInspectorRepository
+    public interface IInspectorRepository
     {
         void AddInspector(Inspector inspector);
         List<Inspector> GetInspectorList();
