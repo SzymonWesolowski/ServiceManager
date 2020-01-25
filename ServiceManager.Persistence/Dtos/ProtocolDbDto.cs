@@ -12,7 +12,7 @@ namespace ServiceManager.Domain.Model
         public Guid ProtocolId { get; set; }
         public Guid ServicemanId { get; set; }
         public DateTime ProtocolDate { get; set; }
-        public int EstateId { get; set; }
+        public Guid EstateId { get; set; }
         public string DeviceSerialNumber { get; set; }
         public bool IsPositive { get; set; }
         public string Recommendations { get; set; }
