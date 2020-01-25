@@ -1,6 +1,6 @@
 ﻿using ServiceManager.Domain.Model;
 
-namespace ServiceManager.Application
+namespace ServiceManager.Application.PdfGeneratorInterfaces
 {
     public interface IRenovationProtocolGenerator
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
-namespace ServiceManager.Application
+namespace ServiceManager.Application.RepositoryInterfaces
 {
-    interface IEstateRepository
+    public interface IEstateRepository
     {
         void AddEstate(Estate estate);
         List<Estate> GetEstateList();
