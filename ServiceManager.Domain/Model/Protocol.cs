@@ -6,7 +6,7 @@ namespace ServiceManager.Domain.Model
     public abstract class Protocol
     {
         protected Protocol(Guid estateId, Guid servicemanId, DateTime protocolDate, bool isPositive,
-            string recommendations, List<string> partsToBeReplaced, string deviceSerialNumber, Guid protocolId)
+            string recommendations, string partsToBeReplaced, string deviceSerialNumber, Guid protocolId)
         {
             EstateId = estateId;
             ServicemanId = servicemanId;
@@ -25,7 +25,7 @@ namespace ServiceManager.Domain.Model
         public string DeviceSerialNumber { get; }
         public bool IsPositive { get; }
         public string Recommendations { get; }
-        public List<string> PartsToBeReplaced { get; }
+        public string PartsToBeReplaced { get; }
         public Guid ProtocolId { get; }
 
     }

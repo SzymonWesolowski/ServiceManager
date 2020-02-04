@@ -11,7 +11,7 @@ namespace ServiceManager.Persistence
     {
         public void AddServiceman(Serviceman serviceman)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.Servicemen.Add(ModelToDto(serviceman));
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace ServiceManager.Persistence
 
         public List<Serviceman> GetServicemanList()
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var servicemanDtoList = context.Servicemen.ToList();
                 var servicemanList = new List<Serviceman>();
@@ -35,7 +35,7 @@ namespace ServiceManager.Persistence
 
         public void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var serviceman = context.Servicemen.SingleOrDefault(s => s.ServicemanId == oldServiceman.ServicemanId);
                 context.Entry(serviceman).CurrentValues.SetValues(ModelToDto(newServiceman));
@@ -45,7 +45,7 @@ namespace ServiceManager.Persistence
 
         public void RemoveServiceman(Serviceman serviceman)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var servicemanDto = context.Servicemen.SingleOrDefault(s => s.ServicemanId == serviceman.ServicemanId);
                 context.Attach(servicemanDto);

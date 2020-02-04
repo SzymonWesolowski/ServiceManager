@@ -11,7 +11,7 @@ namespace ServiceManager.Persistence
     {
         public void Add(InspectionProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.InspectionProtocols.Add(ModelToDto(protocol));
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace ServiceManager.Persistence
 
         public List<InspectionProtocol> GetProtocolList(Device device)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.InspectionProtocols
                     .Where(p => p.DeviceSerialNumber == device.DeviceSerialNumber).ToList();
@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
 
         public void ModifyProtocol(InspectionProtocol oldProtocol, InspectionProtocol newProtocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocol = context.InspectionProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId);
                 context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
@@ -47,7 +47,7 @@ namespace ServiceManager.Persistence
 
         public void DeleteProtocol(InspectionProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocolDto = context.InspectionProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId);
                 context.Attach(protocolDto);

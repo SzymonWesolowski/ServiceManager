@@ -11,7 +11,7 @@ namespace ServiceManager.Persistence
     {
         public void Add(RenovationProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.RenovationProtocols.Add(ModelToDto(protocol));
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace ServiceManager.Persistence
 
         public List<RenovationProtocol> GetProtocolList(Device device)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.RenovationProtocols
                     .Where(p => p.DeviceSerialNumber == device.DeviceSerialNumber).ToList();
@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
 
         public void ModifyProtocol(RenovationProtocol oldProtocol, RenovationProtocol newProtocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocol = context.RenovationProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId);
                 context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
@@ -47,7 +47,7 @@ namespace ServiceManager.Persistence
 
         public void DeleteProtocol(RenovationProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocolDto = context.RenovationProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId);
                 context.Attach(protocolDto);

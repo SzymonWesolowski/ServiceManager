@@ -12,7 +12,7 @@ namespace ServiceManager.Domain.Model
         public  Guid DeviceId { get; set; }
         public string DeviceType { get; set; }
         public int ParkPlaces { get; set; }
-        public List<string> ParkPlacesNumbers { get; set; }
+        public string ParkPlacesNumbers { get; set; }
         public string DeviceSerialNumber { get; set; }
         public DateTime ProductionYear { get; set; }
         public Guid EstateId { get; set; }

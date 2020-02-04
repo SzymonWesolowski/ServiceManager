@@ -7,7 +7,7 @@ namespace ServiceManager.Application
 {
     internal interface IDeviceOperations
     {
-        void AddDevice(string deviceType, int parkPlaces, List<string> parkPlacesNumbers, string deviceSerialNumber,
+        void AddDevice(string deviceType, int parkPlaces, string parkPlacesNumbers, string deviceSerialNumber,
             DateTime productionYear, Guid estateId, Guid deviceId);
 
         void AddDeviceList(List<Device> devices);
@@ -25,7 +25,7 @@ namespace ServiceManager.Application
             _deviceRepository = deviceRepository;
         }
 
-        public void AddDevice(string deviceType, int parkPlaces, List<string> parkPlacesNumbers,
+        public void AddDevice(string deviceType, int parkPlaces, string parkPlacesNumbers,
             string deviceSerialNumber,
             DateTime productionYear, Guid estateId, Guid deviceId)
         {

@@ -7,7 +7,7 @@ namespace ServiceManager.Application.RepositoryInterfaces
     {
         void AddEstate(Estate estate);
         List<Estate> GetEstateList();
-        void ModifyEstate(Estate oldEstate, Estate newEstate);
+        void ModifyEstate(Estate Estate);
         void RemoveEstate(Estate estate);
     }
 }

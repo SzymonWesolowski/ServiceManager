@@ -12,7 +12,7 @@ namespace ServiceManager.Persistence
     {
         public void AddDevice(Device device)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var deviceDbDto = ModelToDto(device);
                 context.Devices.Add(deviceDbDto);
@@ -22,7 +22,7 @@ namespace ServiceManager.Persistence
 
         public List<Device> GetDevices(Estate estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var deviceDtoList = context.Devices.ToList();
                 var deviceList = new List<Device>();
@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
 
         public void ModifyDevice(Device oldDevice, Device newDevice)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var deviceDbDto =
                     context.Devices.FirstOrDefault(d => d.DeviceId == oldDevice.DeviceId);
@@ -48,7 +48,7 @@ namespace ServiceManager.Persistence
 
         public void DeleteDevice(Device device)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                var deviceDto = context.Devices.SingleOrDefault(d => d.DeviceId == device.DeviceId);
                context.Devices.Attach(deviceDto);

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceManager.Webapi
+namespace ServiceManager.Api
 {
     public class Program
     {

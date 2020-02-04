@@ -12,7 +12,7 @@ namespace ServiceManager.Persistence
     {
         public void AddEstate(Estate estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.Estates.Add(ModelToDto(estate));
                 context.SaveChanges();
@@ -21,7 +21,7 @@ namespace ServiceManager.Persistence
 
         public List<Estate> GetEstateList()
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var estateDtoList = context.Estates.ToList();
                 var estateList = new List<Estate>();
@@ -34,19 +34,19 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyEstate(Estate oldEstate, Estate newEstate)
+        public void ModifyEstate(Estate Estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var estate = context.Estates.SingleOrDefault(e => e.EstateId == oldEstate.EstateId);
-                context.Entry(estate).CurrentValues.SetValues(ModelToDto(newEstate));
+                var estate = context.Estates.SingleOrDefault(e => e.EstateId == Estate.EstateId);
+                context.Entry(estate).CurrentValues.SetValues(ModelToDto(Estate));
                 context.SaveChanges();
             }
         }
 
         public void RemoveEstate(Estate estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var estateDto = context.Estates.SingleOrDefault(e => e.EstateId == estate.EstateId);
                 context.Attach(estateDto);

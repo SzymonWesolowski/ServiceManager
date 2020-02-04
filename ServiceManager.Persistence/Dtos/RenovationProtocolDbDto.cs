@@ -6,7 +6,7 @@ namespace ServiceManager.Domain.Model
     public class RenovationProtocolDbDto : ProtocolDbDto
     {
 
-        public List<string> PartsReplaced { get; set; }
+        public string PartsReplaced { get; set; }
        
     }
 }

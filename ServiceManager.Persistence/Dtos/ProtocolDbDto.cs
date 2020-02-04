@@ -16,7 +16,7 @@ namespace ServiceManager.Domain.Model
         public string DeviceSerialNumber { get; set; }
         public bool IsPositive { get; set; }
         public string Recommendations { get; set; }
-        public List<string> PartsToBeReplaced { get; set; }
+        public string PartsToBeReplaced { get; set; }
 
     }
 

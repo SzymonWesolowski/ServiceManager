@@ -6,18 +6,17 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IEstateOperations
+    public interface IEstateOperations
     {
         List<Estate> GetEstateList();
-        void AddEstate(string name, string city, string street, string postCode, 
-            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId);
+        void AddEstate(Estate estate);
 
-        void ModifyEstate(Estate oldEstate, Estate newEstate);
+        void ModifyEstate(Estate estate);
         void DeleteEstate(Estate estate);
 
     }
 
-    class EstateOperations : IEstateOperations
+    public class EstateOperations : IEstateOperations
     {
         private readonly IEstateRepository _estateRepository;
 
@@ -31,16 +30,14 @@ namespace ServiceManager.Application
             return _estateRepository.GetEstateList();
         }
 
-        public void AddEstate(string name, string city, string street, string postCode,
-            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId)
+        public void AddEstate(Estate estate)
         {
-            Estate estate = new Estate(name, city, street, postCode, underContract, lastInspectionDate, estateId, inspectorId);
             _estateRepository.AddEstate(estate);
         }
 
-        public void ModifyEstate(Estate oldEstate, Estate newEstate)
+        public void ModifyEstate(Estate Estate)
         {
-            _estateRepository.ModifyEstate(oldEstate,newEstate);
+            _estateRepository.ModifyEstate(Estate);
         }
 
         public void DeleteEstate(Estate estate)
