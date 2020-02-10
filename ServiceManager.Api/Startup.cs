@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ServiceManager.Application;
+using ServiceManager.Application.RepositoryInterfaces;
 using ServiceManager.Persistence;
 
 namespace ServiceManager.Api
@@ -31,6 +32,7 @@ namespace ServiceManager.Api
             services.AddDbContext<ServiceManagerContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IEstateOperations, EstateOperations>();
+            services.AddTransient<IEstateRepository, EstateRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

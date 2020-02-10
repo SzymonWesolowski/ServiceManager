@@ -16,7 +16,7 @@ namespace ServiceManager.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("FileName = ServiceDB.db");
+            optionsBuilder.UseSqlite("FileName = ./ServiceDB.db");
             base.OnConfiguring(optionsBuilder);
         }
     }

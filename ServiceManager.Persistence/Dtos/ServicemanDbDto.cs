@@ -9,7 +9,7 @@ namespace ServiceManager.Domain.Model
     public class ServicemanDbDto
     {
         [Key]
-        public Guid ServicemanId { get; set; }
+        public string ServicemanId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PermissionNumber { get; set; }

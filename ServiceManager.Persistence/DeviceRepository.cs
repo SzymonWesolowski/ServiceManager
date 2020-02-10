@@ -40,7 +40,7 @@ namespace ServiceManager.Persistence
             using (var context = new ServiceManagerContext())
             {
                 var deviceDbDto =
-                    context.Devices.FirstOrDefault(d => d.DeviceId == oldDevice.DeviceId);
+                    context.Devices.FirstOrDefault(d => d.DeviceId == oldDevice.DeviceId.ToString());
                 context.Entry(deviceDbDto).CurrentValues.SetValues(ModelToDto(newDevice));
                 context.SaveChanges();
             }
@@ -50,10 +50,10 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-               var deviceDto = context.Devices.SingleOrDefault(d => d.DeviceId == device.DeviceId);
-               context.Devices.Attach(deviceDto);
-               context.Devices.Remove(deviceDto);
-               context.SaveChanges();
+                var deviceDto = context.Devices.SingleOrDefault(d => d.DeviceId == device.DeviceId.ToString());
+                context.Devices.Attach(deviceDto);
+                context.Devices.Remove(deviceDto);
+                context.SaveChanges();
             }
         }
 
@@ -62,18 +62,19 @@ namespace ServiceManager.Persistence
             var deviceDto = new DeviceDbDto();
             deviceDto.DeviceSerialNumber = device.DeviceSerialNumber;
             deviceDto.DeviceType = device.DeviceType;
-            deviceDto.EstateId = device.EstateId;
+            deviceDto.EstateId = device.EstateId.ToString();
             deviceDto.ParkPlaces = device.ParkPlaces;
             deviceDto.ParkPlacesNumbers = device.ParkPlacesNumbers;
-            deviceDto.ProductionYear = device.ProductionYear;
-            deviceDto.DeviceId = device.DeviceId;
+            deviceDto.ProductionYear = device.ProductionYear.ToString();
+            deviceDto.DeviceId = device.DeviceId.ToString();
             return deviceDto;
         }
 
         private Device DtoToModel(DeviceDbDto deviceDbDto)
         {
             var device = new Device(deviceDbDto.DeviceType, deviceDbDto.ParkPlaces, deviceDbDto.ParkPlacesNumbers,
-                deviceDbDto.DeviceSerialNumber, deviceDbDto.ProductionYear, deviceDbDto.EstateId, deviceDbDto.DeviceId);
+                deviceDbDto.DeviceSerialNumber, DateTime.Parse(deviceDbDto.ProductionYear),Guid.Parse(deviceDbDto.EstateId),
+                Guid.Parse(deviceDbDto.DeviceId));
             return device;
         }
     }

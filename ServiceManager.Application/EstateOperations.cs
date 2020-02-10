@@ -10,7 +10,7 @@ namespace ServiceManager.Application
     {
         List<Estate> GetEstateList();
         void AddEstate(Estate estate);
-
+        Estate GetEstate(Guid estateGuid);
         void ModifyEstate(Estate estate);
         void DeleteEstate(Estate estate);
 
@@ -33,6 +33,11 @@ namespace ServiceManager.Application
         public void AddEstate(Estate estate)
         {
             _estateRepository.AddEstate(estate);
+        }
+
+        public Estate GetEstate(Guid estateGuid)
+        {
+            return _estateRepository.GetEstate(estateGuid);
         }
 
         public void ModifyEstate(Estate Estate)

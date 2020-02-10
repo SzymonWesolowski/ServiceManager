@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var serviceman = context.Servicemen.SingleOrDefault(s => s.ServicemanId == oldServiceman.ServicemanId);
+                var serviceman = context.Servicemen.SingleOrDefault(s => s.ServicemanId == oldServiceman.ServicemanId.ToString());
                 context.Entry(serviceman).CurrentValues.SetValues(ModelToDto(newServiceman));
                 context.SaveChanges();
             }
@@ -47,7 +47,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var servicemanDto = context.Servicemen.SingleOrDefault(s => s.ServicemanId == serviceman.ServicemanId);
+                var servicemanDto = context.Servicemen.SingleOrDefault(s => s.ServicemanId == serviceman.ServicemanId.ToString());
                 context.Attach(servicemanDto);
                 context.Remove(servicemanDto);
                 context.SaveChanges();
@@ -59,7 +59,7 @@ namespace ServiceManager.Persistence
             var serviceman = new Serviceman(servicemanDbDto.FirstName,
                 servicemanDbDto.LastName,
                 servicemanDbDto.PermissionNumber,
-                servicemanDbDto.ServicemanId);
+                Guid.Parse(servicemanDbDto.ServicemanId));
             return serviceman;
         }
 
@@ -69,7 +69,7 @@ namespace ServiceManager.Persistence
             {
                 FirstName = serviceman.FirstName,
                 LastName = serviceman.LastName,
-                ServicemanId = serviceman.ServicemanId,
+                ServicemanId = serviceman.ServicemanId.ToString(),
                 PermissionNumber = serviceman.PermissionNumber
             };
             return servicemanDto;

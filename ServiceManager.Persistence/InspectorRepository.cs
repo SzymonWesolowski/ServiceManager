@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var inspector = context.Inspectors.SingleOrDefault(i => i.InspectorId == oldInspector.InspectorId);
+                var inspector = context.Inspectors.SingleOrDefault(i => i.InspectorId == oldInspector.InspectorId.ToString());
                 context.Entry(inspector).CurrentValues.SetValues(ModelToDto(newInspector));
                 context.SaveChanges();
             }
@@ -47,7 +47,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspector.InspectorId);
+                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspector.InspectorId.ToString());
                 context.Attach(inspectorDto);
                 context.Remove(inspectorDto);
                 context.SaveChanges();
@@ -58,7 +58,7 @@ namespace ServiceManager.Persistence
         {
             var inspectorDto = new InspectorDbDto
             {
-                InspectorId = inspector.InspectorId,
+                InspectorId = inspector.InspectorId.ToString(),
                 City = inspector.City,
                 FirstName = inspector.FirstName,
                 LastName = inspector.LastName,
@@ -70,7 +70,7 @@ namespace ServiceManager.Persistence
         private Inspector DtoToModel(InspectorDbDto inspectorDbDto)
         {
             var inspector = new Inspector(inspectorDbDto.FirstName, inspectorDbDto.LastName, inspectorDbDto.City,
-                inspectorDbDto.PhoneNumber, inspectorDbDto.InspectorId);
+                inspectorDbDto.PhoneNumber, Guid.Parse(inspectorDbDto.InspectorId));
             return inspector;
         }
     }

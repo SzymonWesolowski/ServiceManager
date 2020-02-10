@@ -27,19 +27,33 @@ namespace ServiceManager.Api.Controllers
             return Ok(_estateOperations.GetEstateList());
         }
 
+        [HttpGet("{estateId}")]
+        public ActionResult<Estate> GetEstate([FromRoute]Guid estateId)
+        {
+            return Ok(_estateOperations.GetEstate(estateId));
+        }
+
         [HttpPost]
         public ActionResult PostEstate([FromBody] Estate estate)
         {
             _estateOperations.AddEstate(estate);
-            return Ok();
+            return Created(new Uri("http://localhost:49460/api/values/" + estate.EstateId), _estateOperations.GetEstate(estate.EstateId));
         }
 
         [HttpDelete]
         public ActionResult DeleteEstate([FromBody] Estate estate)
         {
             _estateOperations.DeleteEstate(estate);
-            return Ok();
+            return NoContent();
         }
+
+        [HttpPut]
+        public ActionResult ModifyEstate([FromBody] Estate estate)
+        {
+            _estateOperations.ModifyEstate(estate);
+            return NoContent();
+        }
+
 
     }
 }

@@ -39,7 +39,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocol = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId);
+                var protocol = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId.ToString());
                 context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
                 context.SaveChanges();
             }
@@ -49,7 +49,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocolDto = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId);
+                var protocolDto = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId.ToString());
                 context.Attach(protocolDto);
                 context.Remove(protocolDto);
                 context.SaveChanges();
@@ -62,12 +62,12 @@ namespace ServiceManager.Persistence
             {
                 DeviceSerialNumber = protocol.DeviceSerialNumber,
                 Recommendations = protocol.Recommendations,
-                EstateId = protocol.EstateId,
+                EstateId = protocol.EstateId.ToString(),
                 IsPositive = protocol.IsPositive,
                 PartsToBeReplaced = protocol.PartsToBeReplaced,
-                ProtocolDate = protocol.ProtocolDate,
-                ProtocolId = protocol.ProtocolId,
-                ServicemanId = protocol.ServicemanId,
+                ProtocolDate = protocol.ProtocolDate.ToString(),
+                ProtocolId = protocol.ProtocolId.ToString(),
+                ServicemanId = protocol.ServicemanId.ToString(),
                 RepairDescription = protocol.RepairDescription,
                 CauseOfFailure = protocol.CauseOfFailure
             };
@@ -76,9 +76,9 @@ namespace ServiceManager.Persistence
 
         private RepairProtocol DtoToModel(RepairProtocolDbDto protocolDbDto)
         {
-            var protocol = new RepairProtocol(protocolDbDto.EstateId, protocolDbDto.ServicemanId,
-                protocolDbDto.ProtocolDate, protocolDbDto.IsPositive, protocolDbDto.Recommendations,
-                protocolDbDto.PartsToBeReplaced, protocolDbDto.DeviceSerialNumber, protocolDbDto.ProtocolId,
+            var protocol = new RepairProtocol(Guid.Parse(protocolDbDto.EstateId), Guid.Parse(protocolDbDto.ServicemanId),
+                DateTime.Parse(protocolDbDto.ProtocolDate), protocolDbDto.IsPositive, protocolDbDto.Recommendations,
+                protocolDbDto.PartsToBeReplaced, protocolDbDto.DeviceSerialNumber, Guid.Parse(protocolDbDto.ProtocolId),
                 protocolDbDto.CauseOfFailure, protocolDbDto.RepairDescription);
             return protocol;
         }

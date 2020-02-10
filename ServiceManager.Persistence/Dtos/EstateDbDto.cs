@@ -9,14 +9,14 @@ namespace ServiceManager.Domain.Model
     public class EstateDbDto
     {
 
-        [Key]
-        public Guid EstateId { get; set; }
+        [Key, Required]
+        public string EstateId { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string PostCode { get; set; }
-        public Guid InspectorId { get; set; }
+        public string InspectorId { get; set; }
         public bool UnderContract { get; set; }
-        public DateTime LastInspectionDate { get; set; }
+        public string LastInspectionDate { get; set; }
     }
 }

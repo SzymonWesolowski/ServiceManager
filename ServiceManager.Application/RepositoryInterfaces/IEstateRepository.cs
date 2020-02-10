@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application.RepositoryInterfaces
@@ -7,7 +8,8 @@ namespace ServiceManager.Application.RepositoryInterfaces
     {
         void AddEstate(Estate estate);
         List<Estate> GetEstateList();
-        void ModifyEstate(Estate Estate);
+        void ModifyEstate(Estate estate);
         void RemoveEstate(Estate estate);
+        Estate GetEstate(Guid estateGuid);
     }
 }
