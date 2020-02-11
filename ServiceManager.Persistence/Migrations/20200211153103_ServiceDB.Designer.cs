@@ -8,7 +8,7 @@ using ServiceManager.Persistence;
 namespace ServiceManager.Persistence.Migrations
 {
     [DbContext(typeof(ServiceManagerContext))]
-    [Migration("20200210164215_ServiceDB")]
+    [Migration("20200211153103_ServiceDB")]
     partial class ServiceDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,8 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("ProtocolId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DeviceId");
+
                     b.Property<string>("DeviceSerialNumber");
 
                     b.Property<string>("EstateId");
@@ -110,6 +112,8 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("ProtocolId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DeviceId");
+
                     b.Property<string>("DeviceSerialNumber");
 
                     b.Property<string>("EstateId");
@@ -137,6 +141,8 @@ namespace ServiceManager.Persistence.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CauseOfFailure");
+
+                    b.Property<string>("DeviceId");
 
                     b.Property<string>("DeviceSerialNumber");
 

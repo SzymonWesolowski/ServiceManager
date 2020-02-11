@@ -33,7 +33,7 @@ namespace ServiceManager.Api.Controllers
         public ActionResult PostEstate([FromBody] Estate estate)
         {
             _estateOperations.AddEstate(estate);
-            return Created(new Uri("http://localhost:49460/api/values/" + estate.EstateId), _estateOperations.GetEstate(estate.EstateId));
+            return Created(new Uri("http://localhost:49460/api/estate/" + estate.EstateId), _estateOperations.GetEstate(estate.EstateId));
         }
 
         [HttpDelete]

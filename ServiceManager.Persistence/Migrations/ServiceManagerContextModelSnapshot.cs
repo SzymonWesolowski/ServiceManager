@@ -66,6 +66,8 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("ProtocolId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DeviceId");
+
                     b.Property<string>("DeviceSerialNumber");
 
                     b.Property<string>("EstateId");
@@ -108,6 +110,8 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("ProtocolId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DeviceId");
+
                     b.Property<string>("DeviceSerialNumber");
 
                     b.Property<string>("EstateId");
@@ -135,6 +139,8 @@ namespace ServiceManager.Persistence.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CauseOfFailure");
+
+                    b.Property<string>("DeviceId");
 
                     b.Property<string>("DeviceSerialNumber");
 

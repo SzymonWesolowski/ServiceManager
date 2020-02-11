@@ -52,7 +52,8 @@ namespace ServiceManager.Persistence.Migrations
                     DeviceSerialNumber = table.Column<string>(nullable: true),
                     IsPositive = table.Column<bool>(nullable: false),
                     Recommendations = table.Column<string>(nullable: true),
-                    PartsToBeReplaced = table.Column<string>(nullable: true)
+                    PartsToBeReplaced = table.Column<string>(nullable: true),
+                    DeviceId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,6 +87,7 @@ namespace ServiceManager.Persistence.Migrations
                     IsPositive = table.Column<bool>(nullable: false),
                     Recommendations = table.Column<string>(nullable: true),
                     PartsToBeReplaced = table.Column<string>(nullable: true),
+                    DeviceId = table.Column<string>(nullable: true),
                     PartsReplaced = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -105,6 +107,7 @@ namespace ServiceManager.Persistence.Migrations
                     IsPositive = table.Column<bool>(nullable: false),
                     Recommendations = table.Column<string>(nullable: true),
                     PartsToBeReplaced = table.Column<string>(nullable: true),
+                    DeviceId = table.Column<string>(nullable: true),
                     CauseOfFailure = table.Column<string>(nullable: true),
                     RepairDescription = table.Column<string>(nullable: true)
                 },

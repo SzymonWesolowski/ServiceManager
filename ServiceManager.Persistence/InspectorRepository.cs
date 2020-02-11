@@ -37,7 +37,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspector.InspectorId.ToString());
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspector.InspectorId.ToString());
                 context.Entry(inspectorDto).CurrentValues.SetValues(ModelToDto(inspector));
                 context.SaveChanges();
             }
@@ -47,7 +47,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspectorId.ToString());
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspectorId.ToString());
                 context.Attach(inspectorDto);
                 context.Remove(inspectorDto);
                 context.SaveChanges();
@@ -58,7 +58,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var inspectorDto = context.Inspectors.First(i => i.InspectorId == inspectorId.ToString());
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspectorId.ToString());
                 return DtoToModel(inspectorDto);
             }
         }

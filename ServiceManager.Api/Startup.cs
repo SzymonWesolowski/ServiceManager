@@ -30,6 +30,10 @@ namespace ServiceManager.Api
             services.AddTransient<IDeviceRepository, DeviceRepository>();
             services.AddTransient<IInspectorRepository, InspectorRepository>();
             services.AddTransient<IInspectorOperations, InspectorOperations>();
+            services.AddTransient<IServicemanRepository, ServicemanRepository>();
+            services.AddTransient<IServicemanOperations, ServicemanOperations>();
+            services.AddTransient<IInspectionProtocolOperations, InspectionProtocolOperations>();
+            services.AddTransient<IInspectionProtocolRepository, InspectionProtocolRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

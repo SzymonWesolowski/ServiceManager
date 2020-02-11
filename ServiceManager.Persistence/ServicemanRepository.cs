@@ -7,7 +7,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class ServicemanRepository : IServicemanRepository
+    public class ServicemanRepository : IServicemanRepository
     {
         public void AddServiceman(Serviceman serviceman)
         {
@@ -33,24 +33,33 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman)
+        public void ModifyServiceman(Serviceman serviceman)
         {
             using (var context = new ServiceManagerContext())
             {
-                var serviceman = context.Servicemen.SingleOrDefault(s => s.ServicemanId == oldServiceman.ServicemanId.ToString());
-                context.Entry(serviceman).CurrentValues.SetValues(ModelToDto(newServiceman));
+                var servicemanDto = context.Servicemen.Single(s => s.ServicemanId == serviceman.ServicemanId.ToString());
+                context.Entry(servicemanDto).CurrentValues.SetValues(ModelToDto(serviceman));
                 context.SaveChanges();
             }
         }
 
-        public void RemoveServiceman(Serviceman serviceman)
+        public void RemoveServiceman(Guid servicemanId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var servicemanDto = context.Servicemen.SingleOrDefault(s => s.ServicemanId == serviceman.ServicemanId.ToString());
+                var servicemanDto = context.Servicemen.Single(s => s.ServicemanId == servicemanId.ToString());
                 context.Attach(servicemanDto);
                 context.Remove(servicemanDto);
                 context.SaveChanges();
+            }
+        }
+
+        public Serviceman GetServiceman(Guid servicemanId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var servicemanDto = context.Servicemen.Single(s => s.ServicemanId == servicemanId.ToString());
+                return DtoToModel(servicemanDto);
             }
         }
 

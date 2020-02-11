@@ -7,7 +7,7 @@ namespace ServiceManager.Domain.Model
     {
         public RenovationProtocol(Guid estateId, Guid servicemanId, DateTime protocolDate, bool isPositive,
             string recommendations, string partsToBeReplaced, string deviceSerialNumber, Guid protocolId,
-            string partsReplaced) : base(estateId, servicemanId, protocolDate, isPositive, recommendations, partsToBeReplaced, deviceSerialNumber, protocolId)
+            string partsReplaced, Guid deviceId) : base(estateId, servicemanId, protocolDate, isPositive, recommendations, partsToBeReplaced, deviceSerialNumber, protocolId, deviceId)
         {
             PartsReplaced = partsReplaced;
         }

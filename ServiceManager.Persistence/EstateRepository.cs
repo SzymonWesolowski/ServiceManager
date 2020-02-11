@@ -38,7 +38,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var estate = context.Estates.SingleOrDefault(e => e.EstateId == Estate.EstateId.ToString());
+                var estate = context.Estates.Single(e => e.EstateId == Estate.EstateId.ToString());
                 context.Entry(estate).CurrentValues.SetValues(ModelToDto(Estate));
                 context.SaveChanges();
             }
@@ -48,7 +48,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var estateDto = context.Estates.SingleOrDefault(e => e.EstateId == estateId.ToString());
+                var estateDto = context.Estates.Single(e => e.EstateId == estateId.ToString());
                 context.Attach(estateDto);
                 context.Remove(estateDto);
                 context.SaveChanges();

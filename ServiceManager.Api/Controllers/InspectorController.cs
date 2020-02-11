@@ -33,7 +33,7 @@ namespace ServiceManager.Api.Controllers
         public ActionResult AddInspector(Inspector inspector)
         {
             _inspectorOperations.AddInspector(inspector);
-            return Created(new Uri("http://localhost:49460/api/values/" + inspector.InspectorId),
+            return Created(new Uri("http://localhost:49460/api/inspector/" + inspector.InspectorId),
                 _inspectorOperations.GetInspector(inspector.InspectorId));
         }
 

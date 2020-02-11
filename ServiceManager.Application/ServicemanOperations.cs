@@ -6,15 +6,16 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IServicemanOperations
+    public interface IServicemanOperations
     {
-        void AddServiceman(string firstName, string lastName, string permissionNumber, Guid servicemanId);
+        void AddServiceman(Serviceman serviceman);
         List<Serviceman> GetServicemanList();
-        void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman);
-        void DeleteServiceman(Serviceman serviceman);
+        void ModifyServiceman(Serviceman serviceman);
+        void DeleteServiceman(Guid servicemanId);
+        Serviceman GetServiceman(Guid servicemanId);
     }
 
-    class ServicemanOperations : IServicemanOperations
+    public class ServicemanOperations : IServicemanOperations
     {
         private readonly IServicemanRepository _servicemanRepository;
 
@@ -23,9 +24,8 @@ namespace ServiceManager.Application
             _servicemanRepository = servicemanRepository;
         }
 
-        public void AddServiceman(string firstName, string lastName, string permissionNumber, Guid servicemanId)
+        public void AddServiceman(Serviceman serviceman)
         {
-            var serviceman = new Serviceman(firstName, lastName, permissionNumber, servicemanId);
             _servicemanRepository.AddServiceman(serviceman);
         }
 
@@ -34,14 +34,19 @@ namespace ServiceManager.Application
             return _servicemanRepository.GetServicemanList();
         }
 
-        public void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman)
+        public void ModifyServiceman(Serviceman serviceman)
         {
-            _servicemanRepository.ModifyServiceman(oldServiceman, newServiceman);
+            _servicemanRepository.ModifyServiceman(serviceman);
         }
 
-        public void DeleteServiceman(Serviceman serviceman)
+        public void DeleteServiceman(Guid servicemanId)
         {
-            _servicemanRepository.RemoveServiceman(serviceman);
+            _servicemanRepository.RemoveServiceman(servicemanId);
+        }
+
+        public Serviceman GetServiceman(Guid servicemanId)
+        {
+            return _servicemanRepository.GetServiceman(servicemanId);
         }
     }
 }

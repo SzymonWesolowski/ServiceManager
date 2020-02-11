@@ -39,7 +39,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocol = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId.ToString());
+                var protocol = context.RepairProtocols.Single(p => p.ProtocolId == oldProtocol.ProtocolId.ToString());
                 context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
                 context.SaveChanges();
             }
@@ -49,7 +49,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocolDto = context.RepairProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                var protocolDto = context.RepairProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
                 context.Attach(protocolDto);
                 context.Remove(protocolDto);
                 context.SaveChanges();
@@ -79,7 +79,7 @@ namespace ServiceManager.Persistence
             var protocol = new RepairProtocol(Guid.Parse(protocolDbDto.EstateId), Guid.Parse(protocolDbDto.ServicemanId),
                 DateTime.Parse(protocolDbDto.ProtocolDate), protocolDbDto.IsPositive, protocolDbDto.Recommendations,
                 protocolDbDto.PartsToBeReplaced, protocolDbDto.DeviceSerialNumber, Guid.Parse(protocolDbDto.ProtocolId),
-                protocolDbDto.CauseOfFailure, protocolDbDto.RepairDescription);
+                protocolDbDto.CauseOfFailure, protocolDbDto.RepairDescription, Guid.Parse(protocolDbDto.DeviceId));
             return protocol;
         }
     }

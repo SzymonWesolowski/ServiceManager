@@ -8,8 +8,9 @@ namespace ServiceManager.Application.RepositoryInterfaces
     public interface IInspectionProtocolRepository
     {
         void Add(InspectionProtocol protocol);
-        List<InspectionProtocol> GetProtocolList(Device device);
-        void ModifyProtocol(InspectionProtocol oldProtocol, InspectionProtocol newProtocol);
-        void DeleteProtocol(InspectionProtocol protocol);
+        List<InspectionProtocol> GetProtocolList(string deviceSerialNumber);
+        void ModifyProtocol(InspectionProtocol Protocol);
+        void DeleteProtocol(Guid protocolId);
+        InspectionProtocol GetProtocol(Guid protocolId);
     }
 }

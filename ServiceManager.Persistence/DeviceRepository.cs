@@ -40,7 +40,7 @@ namespace ServiceManager.Persistence
             using (var context = new ServiceManagerContext())
             {
                 var deviceDbDto =
-                    context.Devices.FirstOrDefault(d => d.DeviceId == device.DeviceId.ToString());
+                    context.Devices.Single(d => d.DeviceId == device.DeviceId.ToString());
                 context.Entry(deviceDbDto).CurrentValues.SetValues(ModelToDto(device));
                 context.SaveChanges();
             }
@@ -50,7 +50,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var deviceDto = context.Devices.SingleOrDefault(d => d.DeviceId == device.DeviceId.ToString());
+                var deviceDto = context.Devices.Single(d => d.DeviceId == device.DeviceId.ToString());
                 context.Devices.Attach(deviceDto);
                 context.Devices.Remove(deviceDto);
                 context.SaveChanges();
@@ -61,7 +61,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var deviceDto = context.Devices.FirstOrDefault(d => d.DeviceId == deviceId);
+                var deviceDto = context.Devices.Single(d => d.DeviceId == deviceId);
                 return DtoToModel(deviceDto);
             }
         }
