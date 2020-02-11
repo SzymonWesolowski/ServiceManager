@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceManager.Application;
 using ServiceManager.Application.RepositoryInterfaces;
+using ServiceManager.Domain.Model;
 using ServiceManager.Persistence;
 
 namespace ServiceManager.Api
@@ -34,6 +35,8 @@ namespace ServiceManager.Api
             services.AddTransient<IServicemanOperations, ServicemanOperations>();
             services.AddTransient<IInspectionProtocolOperations, InspectionProtocolOperations>();
             services.AddTransient<IInspectionProtocolRepository, InspectionProtocolRepository>();
+            services.AddTransient<IRenovationProtocolOperations, RenovationProtocolOperations>();
+            services.AddTransient<IRenovationProtocolRepository, RenovationProtocolRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

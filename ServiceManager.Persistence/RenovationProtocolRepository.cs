@@ -7,7 +7,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class RenovationProtocolRepository : IRenovationProtocolRepository
+    public class RenovationProtocolRepository : IRenovationProtocolRepository
     {
         public void Add(RenovationProtocol protocol)
         {
@@ -18,12 +18,12 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public List<RenovationProtocol> GetProtocolList(Device device)
+        public List<RenovationProtocol> GetProtocolList(Guid deviceId)
         {
             using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.RenovationProtocols
-                    .Where(p => p.DeviceSerialNumber == device.DeviceSerialNumber).ToList();
+                    .Where(p => p.DeviceSerialNumber == deviceId.ToString()).ToList();
                 var protocolList = new List<RenovationProtocol>();
 
                 foreach (var protocolDto in protocolDtoList)
@@ -35,24 +35,34 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyProtocol(RenovationProtocol oldProtocol, RenovationProtocol newProtocol)
+        public void ModifyProtocol(RenovationProtocol protocol)
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocol = context.RenovationProtocols.Single(p => p.ProtocolId == oldProtocol.ProtocolId.ToString());
-                context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
+                var protocolDbDto = context.RenovationProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                context.Entry(protocolDbDto).CurrentValues.SetValues(ModelToDto(protocol));
                 context.SaveChanges();
             }
         }
 
-        public void DeleteProtocol(RenovationProtocol protocol)
+        public void DeleteProtocol(Guid protocolId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocolDto = context.RenovationProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                var protocolDto = context.RenovationProtocols.Single(p => p.ProtocolId == protocolId.ToString());
                 context.Attach(protocolDto);
                 context.Remove(protocolDto);
                 context.SaveChanges();
+            }
+        }
+
+        public RenovationProtocol GetProtocol(Guid protocolId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var renovationProtocolDto =
+                    context.RenovationProtocols.Single(p => p.ProtocolId == protocolId.ToString());
+                return DtoToModel(renovationProtocolDto);
             }
         }
 
