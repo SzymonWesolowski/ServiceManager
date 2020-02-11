@@ -8,7 +8,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class DeviceRepository : IDeviceRepository
+    public class DeviceRepository : IDeviceRepository
     {
         public void AddDevice(Device device)
         {
@@ -20,11 +20,11 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public List<Device> GetDevices(Estate estate)
+        public List<Device> GetDevices(Guid estateId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var deviceDtoList = context.Devices.ToList();
+                var deviceDtoList = context.Devices.Where(d => d.EstateId == estateId.ToString());
                 var deviceList = new List<Device>();
                 foreach (var deviceDbDto in deviceDtoList)
                 {
@@ -35,13 +35,13 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyDevice(Device oldDevice, Device newDevice)
+        public void ModifyDevice(Device device)
         {
             using (var context = new ServiceManagerContext())
             {
                 var deviceDbDto =
-                    context.Devices.FirstOrDefault(d => d.DeviceId == oldDevice.DeviceId.ToString());
-                context.Entry(deviceDbDto).CurrentValues.SetValues(ModelToDto(newDevice));
+                    context.Devices.FirstOrDefault(d => d.DeviceId == device.DeviceId.ToString());
+                context.Entry(deviceDbDto).CurrentValues.SetValues(ModelToDto(device));
                 context.SaveChanges();
             }
         }
@@ -54,6 +54,15 @@ namespace ServiceManager.Persistence
                 context.Devices.Attach(deviceDto);
                 context.Devices.Remove(deviceDto);
                 context.SaveChanges();
+            }
+        }
+
+        public Device GetDevice(string deviceId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var deviceDto = context.Devices.FirstOrDefault(d => d.DeviceId == deviceId);
+                return DtoToModel(deviceDto);
             }
         }
 

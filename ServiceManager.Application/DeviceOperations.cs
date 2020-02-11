@@ -5,18 +5,19 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IDeviceOperations
+    public interface IDeviceOperations
     {
-        void AddDevice(string deviceType, int parkPlaces, string parkPlacesNumbers, string deviceSerialNumber,
-            DateTime productionYear, Guid estateId, Guid deviceId);
+        void AddDevice(Device device);
 
         void AddDeviceList(List<Device> devices);
-        List<Device> GetDeviceList(Estate estate);
+        List<Device> GetDeviceList(Guid estateId);
         void RemoveDevice(Device device);
         void RemoveDeviceList(List<Device> devices);
+        Device GetDevice(string deviceId);
+        void ModifyDevice(Device device);
     }
 
-    class DeviceOperations : IDeviceOperations
+    public class DeviceOperations : IDeviceOperations
     {
         private readonly IDeviceRepository _deviceRepository;
 
@@ -25,12 +26,8 @@ namespace ServiceManager.Application
             _deviceRepository = deviceRepository;
         }
 
-        public void AddDevice(string deviceType, int parkPlaces, string parkPlacesNumbers,
-            string deviceSerialNumber,
-            DateTime productionYear, Guid estateId, Guid deviceId)
+        public void AddDevice(Device device)
         {
-            var device = new Device(deviceType, parkPlaces, parkPlacesNumbers, deviceSerialNumber, productionYear,
-                estateId, deviceId);
             _deviceRepository.AddDevice(device);
         }
 
@@ -42,9 +39,9 @@ namespace ServiceManager.Application
             }
         }
 
-        public List<Device> GetDeviceList(Estate estate)
+        public List<Device> GetDeviceList(Guid estateId)
         {
-            return _deviceRepository.GetDevices(estate);
+            return _deviceRepository.GetDevices(estateId);
         }
 
         public void RemoveDevice(Device device)
@@ -58,6 +55,16 @@ namespace ServiceManager.Application
             {
                 _deviceRepository.DeleteDevice(device);
             }
+        }
+
+        public Device GetDevice(string deviceId)
+        {
+            return _deviceRepository.GetDevice(deviceId);
+        }
+
+        public void ModifyDevice(Device device)
+        {
+            _deviceRepository.ModifyDevice(device);
         }
     }
 }

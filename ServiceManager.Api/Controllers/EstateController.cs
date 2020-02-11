@@ -41,9 +41,9 @@ namespace ServiceManager.Api.Controllers
         }
 
         [HttpDelete]
-        public ActionResult DeleteEstate([FromBody] Estate estate)
+        public ActionResult DeleteEstate([FromBody] Guid estateId)
         {
-            _estateOperations.DeleteEstate(estate);
+            _estateOperations.DeleteEstate(estateId);
             return NoContent();
         }
 

@@ -44,11 +44,11 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void RemoveEstate(Estate estate)
+        public void RemoveEstate(Guid estateId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var estateDto = context.Estates.SingleOrDefault(e => e.EstateId == estate.EstateId.ToString());
+                var estateDto = context.Estates.SingleOrDefault(e => e.EstateId == estateId.ToString());
                 context.Attach(estateDto);
                 context.Remove(estateDto);
                 context.SaveChanges();

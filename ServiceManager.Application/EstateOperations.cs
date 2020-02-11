@@ -12,7 +12,7 @@ namespace ServiceManager.Application
         void AddEstate(Estate estate);
         Estate GetEstate(Guid estateGuid);
         void ModifyEstate(Estate estate);
-        void DeleteEstate(Estate estate);
+        void DeleteEstate(Guid estateId);
 
     }
 
@@ -45,9 +45,9 @@ namespace ServiceManager.Application
             _estateRepository.ModifyEstate(Estate);
         }
 
-        public void DeleteEstate(Estate estate)
+        public void DeleteEstate(Guid estateId)
         {
-            _estateRepository.RemoveEstate(estate);
+            _estateRepository.RemoveEstate(estateId);
         }
     }
 }
