@@ -28,6 +28,8 @@ namespace ServiceManager.Api
             services.AddTransient<IEstateRepository, EstateRepository>();
             services.AddTransient<IDeviceOperations, DeviceOperations>();
             services.AddTransient<IDeviceRepository, DeviceRepository>();
+            services.AddTransient<IInspectorRepository, InspectorRepository>();
+            services.AddTransient<IInspectorOperations, InspectorOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

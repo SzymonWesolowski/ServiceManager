@@ -6,15 +6,16 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IInspectorOperations
+    public interface IInspectorOperations
     {
-        void AddInspector(string firstName, string lastName, string city, string phoneNumber, Guid inspectorId);
-        List<Inspector> GeInspectorList();
-        void ModifyInspector(Inspector oldInspector, Inspector newInspector);
-        void RemoveInspector(Inspector inspector);
+        void AddInspector(Inspector inspector);
+        List<Inspector> GetInspectorList();
+        void ModifyInspector(Inspector inspector);
+        void RemoveInspector(Guid inspectorId);
+        Inspector GetInspector(Guid inspectorId);
     }
 
-    class InspectorOperations : IInspectorOperations
+    public class InspectorOperations : IInspectorOperations
 
     {
         private readonly IInspectorRepository _inspectorRepository;
@@ -23,25 +24,29 @@ namespace ServiceManager.Application
         {
             _inspectorRepository = inspectorRepository;
         }
-        public void AddInspector(string firstName, string lastName, string city, string phoneNumber, Guid inspectorId)
+        public void AddInspector(Inspector inspector)
         {
-            var inspector = new Inspector(firstName, lastName, city, phoneNumber, inspectorId);
             _inspectorRepository.AddInspector(inspector);
         }
 
-        public List<Inspector> GeInspectorList()
+        public List<Inspector> GetInspectorList()
         {
             return _inspectorRepository.GetInspectorList();
         }
 
-        public void ModifyInspector(Inspector oldInspector, Inspector newInspector)
+        public void ModifyInspector(Inspector inspector)
         {
-            _inspectorRepository.ModifyInspector(oldInspector, newInspector);
+            _inspectorRepository.ModifyInspector(inspector);
         }
 
-        public void RemoveInspector(Inspector inspector)
+        public void RemoveInspector(Guid inspectorId)
         {
-            _inspectorRepository.RemoveInspector(inspector);
+            _inspectorRepository.RemoveInspector(inspectorId);
+        }
+
+        public Inspector GetInspector(Guid inspectorId)
+        {
+            return _inspectorRepository.GetInspector(inspectorId);
         }
     }
 }

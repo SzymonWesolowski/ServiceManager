@@ -7,7 +7,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class InspectorRepository :IInspectorRepository
+    public class InspectorRepository :IInspectorRepository
     {
         public void AddInspector(Inspector inspector)
         {
@@ -33,24 +33,33 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyInspector(Inspector oldInspector, Inspector newInspector)
-        {
-            using (var context = new ServiceManagerContext())
-            {
-                var inspector = context.Inspectors.SingleOrDefault(i => i.InspectorId == oldInspector.InspectorId.ToString());
-                context.Entry(inspector).CurrentValues.SetValues(ModelToDto(newInspector));
-                context.SaveChanges();
-            }
-        }
-
-        public void RemoveInspector(Inspector inspector)
+        public void ModifyInspector(Inspector inspector)
         {
             using (var context = new ServiceManagerContext())
             {
                 var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspector.InspectorId.ToString());
+                context.Entry(inspectorDto).CurrentValues.SetValues(ModelToDto(inspector));
+                context.SaveChanges();
+            }
+        }
+
+        public void RemoveInspector(Guid inspectorId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspectorId.ToString());
                 context.Attach(inspectorDto);
                 context.Remove(inspectorDto);
                 context.SaveChanges();
+            }
+        }
+
+        public Inspector GetInspector(Guid inspectorId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var inspectorDto = context.Inspectors.First(i => i.InspectorId == inspectorId.ToString());
+                return DtoToModel(inspectorDto);
             }
         }
 
