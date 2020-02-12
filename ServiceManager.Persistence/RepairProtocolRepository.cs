@@ -7,7 +7,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class RepairProtocolRepository : IRepairProtocolRepository
+    public class RepairProtocolRepository : IRepairProtocolRepository
     {
         public void Add(RepairProtocol repairProtocol)
         {
@@ -18,12 +18,12 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public List<RepairProtocol> GetProtocolList(Device device)
+        public List<RepairProtocol> GetProtocolList(Guid deviceId)
         {
             using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.RepairProtocols
-                    .Where(p => p.DeviceSerialNumber == device.DeviceSerialNumber).ToList();
+                    .Where(p => p.DeviceId == deviceId.ToString()).ToList();
                 var protocolList = new List<RepairProtocol>();
 
                 foreach (var protocolDto in protocolDtoList)
@@ -35,24 +35,33 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyProtocol(RepairProtocol oldProtocol, RepairProtocol newProtocol)
+        public void ModifyProtocol(RepairProtocol protocol)
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocol = context.RepairProtocols.Single(p => p.ProtocolId == oldProtocol.ProtocolId.ToString());
-                context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
+                var protocolDbDto = context.RepairProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                context.Entry(protocolDbDto).CurrentValues.SetValues(ModelToDto(protocol));
                 context.SaveChanges();
             }
         }
 
-        public void DeleteProtocol(RepairProtocol protocol)
+        public void DeleteProtocol(Guid protocolId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var protocolDto = context.RepairProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                var protocolDto = context.RepairProtocols.Single(p => p.ProtocolId == protocolId.ToString());
                 context.Attach(protocolDto);
                 context.Remove(protocolDto);
                 context.SaveChanges();
+            }
+        }
+
+        public RepairProtocol GetProtocol(Guid protocolId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var protocolDto = context.RepairProtocols.Single(p => p.ProtocolId == protocolId.ToString());
+                return DtoToModel(protocolDto);
             }
         }
 

@@ -37,6 +37,8 @@ namespace ServiceManager.Api
             services.AddTransient<IInspectionProtocolRepository, InspectionProtocolRepository>();
             services.AddTransient<IRenovationProtocolOperations, RenovationProtocolOperations>();
             services.AddTransient<IRenovationProtocolRepository, RenovationProtocolRepository>();
+            services.AddTransient<IRepairProtocolRepository, RepairProtocolRepository>();
+            services.AddTransient<IRepairProtocolOperations, RepairProtocolOperations>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
