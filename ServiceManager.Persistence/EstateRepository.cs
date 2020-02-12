@@ -8,11 +8,11 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class EstateRepository : IEstateRepository
+    public class EstateRepository : IEstateRepository
     {
         public void AddEstate(Estate estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.Estates.Add(ModelToDto(estate));
                 context.SaveChanges();
@@ -21,7 +21,7 @@ namespace ServiceManager.Persistence
 
         public List<Estate> GetEstateList()
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var estateDtoList = context.Estates.ToList();
                 var estateList = new List<Estate>();
@@ -34,49 +34,70 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyEstate(Estate oldEstate, Estate newEstate)
+        public void ModifyEstate(Estate Estate)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var estate = context.Estates.SingleOrDefault(e => e.EstateId == oldEstate.EstateId);
-                context.Entry(estate).CurrentValues.SetValues(ModelToDto(newEstate));
+                var estate = context.Estates.Single(e => e.EstateId == Estate.EstateId.ToString());
+                context.Entry(estate).CurrentValues.SetValues(ModelToDto(Estate));
                 context.SaveChanges();
             }
         }
 
-        public void RemoveEstate(Estate estate)
+        public void RemoveEstate(Guid estateId)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var estateDto = context.Estates.SingleOrDefault(e => e.EstateId == estate.EstateId);
+                var estateDto = context.Estates.Single(e => e.EstateId == estateId.ToString());
                 context.Attach(estateDto);
                 context.Remove(estateDto);
                 context.SaveChanges();
             }
         }
 
+        public Estate GetEstate(Guid estateGuid)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var estateDto = context.Estates.FirstOrDefault(e => e.EstateId == estateGuid.ToString());
+                return DtoToModel(estateDto);
+            }
+        }
+
         private EstateDbDto ModelToDto(Estate estate)
         {
-            var estateDbDto = new EstateDbDto
             {
-                EstateId = estate.EstateId,
-                City = estate.City,
-                InspectorId = estate.InspectorId,
-                LastInspectionDate = estate.LastInspectionDate,
-                Name = estate.Name,
-                PostCode = estate.PostCode,
-                Street = estate.Street,
-                UnderContract = estate.UnderContract
-            };
-            return estateDbDto;
+                var estateDbDto = new EstateDbDto
+                {
+                    EstateId = estate.EstateId.ToString(),
+                    City = estate.City,
+                    LastInspectionDate = estate.LastInspectionDate.ToString(),
+                    Name = estate.Name,
+                    PostCode = estate.PostCode,
+                    Street = estate.Street,
+                    UnderContract = estate.UnderContract
+                };
+
+                estateDbDto.InspectorId = estate.InspectorId == null ? null : estate.InspectorId.ToString();
+
+                return estateDbDto;
+            }
         }
 
         private Estate DtoToModel(EstateDbDto estateDbDto)
         {
-            var estate = new Estate(estateDbDto.Name, estateDbDto.City, estateDbDto.Street, estateDbDto.PostCode,
-                estateDbDto.UnderContract, estateDbDto.LastInspectionDate, estateDbDto.EstateId,
-                estateDbDto.InspectorId);
-            return estate;
+            if (estateDbDto.InspectorId != null)
+            {
+                return new Estate(estateDbDto.Name, estateDbDto.City, estateDbDto.Street, estateDbDto.PostCode,
+                    estateDbDto.UnderContract, DateTime.Parse(estateDbDto.LastInspectionDate),
+                    Guid.Parse(estateDbDto.EstateId),
+                    Guid.Parse(estateDbDto.InspectorId));
+            }
+
+            return new Estate(estateDbDto.Name, estateDbDto.City, estateDbDto.Street, estateDbDto.PostCode,
+                estateDbDto.UnderContract, DateTime.Parse(estateDbDto.LastInspectionDate),
+                Guid.Parse(estateDbDto.EstateId),
+                null);
         }
     }
 }

@@ -7,23 +7,23 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class RenovationProtocolRepository : IRenovationProtocolRepository
+    public class RenovationProtocolRepository : IRenovationProtocolRepository
     {
         public void Add(RenovationProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.RenovationProtocols.Add(ModelToDto(protocol));
                 context.SaveChanges();
             }
         }
 
-        public List<RenovationProtocol> GetProtocolList(Device device)
+        public List<RenovationProtocol> GetProtocolList(Guid deviceId)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.RenovationProtocols
-                    .Where(p => p.DeviceSerialNumber == device.DeviceSerialNumber).ToList();
+                    .Where(p => p.DeviceSerialNumber == deviceId.ToString()).ToList();
                 var protocolList = new List<RenovationProtocol>();
 
                 foreach (var protocolDto in protocolDtoList)
@@ -35,24 +35,34 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyProtocol(RenovationProtocol oldProtocol, RenovationProtocol newProtocol)
+        public void ModifyProtocol(RenovationProtocol protocol)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var protocol = context.RenovationProtocols.SingleOrDefault(p => p.ProtocolId == oldProtocol.ProtocolId);
-                context.Entry(protocol).CurrentValues.SetValues(ModelToDto(newProtocol));
+                var protocolDbDto = context.RenovationProtocols.Single(p => p.ProtocolId == protocol.ProtocolId.ToString());
+                context.Entry(protocolDbDto).CurrentValues.SetValues(ModelToDto(protocol));
                 context.SaveChanges();
             }
         }
 
-        public void DeleteProtocol(RenovationProtocol protocol)
+        public void DeleteProtocol(Guid protocolId)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var protocolDto = context.RenovationProtocols.SingleOrDefault(p => p.ProtocolId == protocol.ProtocolId);
+                var protocolDto = context.RenovationProtocols.Single(p => p.ProtocolId == protocolId.ToString());
                 context.Attach(protocolDto);
                 context.Remove(protocolDto);
                 context.SaveChanges();
+            }
+        }
+
+        public RenovationProtocol GetProtocol(Guid protocolId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var renovationProtocolDto =
+                    context.RenovationProtocols.Single(p => p.ProtocolId == protocolId.ToString());
+                return DtoToModel(renovationProtocolDto);
             }
         }
 
@@ -62,22 +72,22 @@ namespace ServiceManager.Persistence
             {
                 DeviceSerialNumber = protocol.DeviceSerialNumber,
                 Recommendations = protocol.Recommendations,
-                EstateId = protocol.EstateId,
+                EstateId = protocol.EstateId.ToString(),
                 IsPositive = protocol.IsPositive,
                 PartsToBeReplaced = protocol.PartsToBeReplaced,
-                ProtocolDate = protocol.ProtocolDate,
-                ProtocolId = protocol.ProtocolId,
-                ServicemanId = protocol.ServicemanId,
+                ProtocolDate = protocol.ProtocolDate.ToString(),
+                ProtocolId = protocol.ProtocolId.ToString(),
+                ServicemanId = protocol.ServicemanId.ToString(),
                 PartsReplaced = protocol.PartsReplaced
             };
             return protocolDto;
         }
         private RenovationProtocol DtoToModel(RenovationProtocolDbDto protocolDbDto)
         {
-            var protocol = new RenovationProtocol(protocolDbDto.EstateId, protocolDbDto.ServicemanId,
-                protocolDbDto.ProtocolDate, protocolDbDto.IsPositive, protocolDbDto.Recommendations,
-                protocolDbDto.PartsToBeReplaced, protocolDbDto.DeviceSerialNumber, protocolDbDto.ProtocolId,
-                protocolDbDto.PartsReplaced);
+            var protocol = new RenovationProtocol(Guid.Parse(protocolDbDto.EstateId), Guid.Parse(protocolDbDto.ServicemanId),
+                DateTime.Parse(  protocolDbDto.ProtocolDate), protocolDbDto.IsPositive, protocolDbDto.Recommendations,
+                protocolDbDto.PartsToBeReplaced, protocolDbDto.DeviceSerialNumber, Guid.Parse(protocolDbDto.ProtocolId),
+                protocolDbDto.PartsReplaced, Guid.Parse(protocolDbDto.DeviceId));
             return protocol;
         }
     }

@@ -7,7 +7,7 @@ namespace ServiceManager.Domain.Model
     {
 
         [Key]
-        public Guid InspectorId { get; set; }
+        public string InspectorId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }

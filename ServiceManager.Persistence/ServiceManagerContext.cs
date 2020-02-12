@@ -4,7 +4,7 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    public class ServiceContext : DbContext
+    public class ServiceManagerContext : DbContext
     {
         public DbSet<EstateDbDto> Estates { get; set; }
         public DbSet<DeviceDbDto> Devices { get; set; }
@@ -16,7 +16,7 @@ namespace ServiceManager.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("FileName = ServiceDB.db");
+            optionsBuilder.UseSqlite("FileName = ./ServiceDB.db");
             base.OnConfiguring(optionsBuilder);
         }
     }

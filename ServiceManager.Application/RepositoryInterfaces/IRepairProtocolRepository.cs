@@ -8,9 +8,9 @@ namespace ServiceManager.Application.RepositoryInterfaces
     public interface IRepairProtocolRepository
     {
         void Add(RepairProtocol repairProtocol);
-        List<RepairProtocol> GetProtocolList(Device device);
-        void ModifyProtocol(RepairProtocol oldProtocol, RepairProtocol newProtocol);
-        void DeleteProtocol(RepairProtocol protocol);
-
+        List<RepairProtocol> GetProtocolList(Guid deviceId);
+        void ModifyProtocol(RepairProtocol protocol);
+        void DeleteProtocol(Guid protocolId);
+        RepairProtocol GetProtocol(Guid protocolId);
     }
 }

@@ -7,11 +7,11 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Persistence
 {
-    class InspectorRepository :IInspectorRepository
+    public class InspectorRepository :IInspectorRepository
     {
         public void AddInspector(Inspector inspector)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 context.Inspectors.Add(ModelToDto(inspector));
                 context.SaveChanges();
@@ -20,7 +20,7 @@ namespace ServiceManager.Persistence
 
         public List<Inspector> GetInspectorList()
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
                 var inspectorDtoList = context.Inspectors.ToList();
                 var inspectorList = new List<Inspector>();
@@ -33,24 +33,33 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public void ModifyInspector(Inspector oldInspector, Inspector newInspector)
+        public void ModifyInspector(Inspector inspector)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var inspector = context.Inspectors.SingleOrDefault(i => i.InspectorId == oldInspector.InspectorId);
-                context.Entry(inspector).CurrentValues.SetValues(ModelToDto(newInspector));
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspector.InspectorId.ToString());
+                context.Entry(inspectorDto).CurrentValues.SetValues(ModelToDto(inspector));
                 context.SaveChanges();
             }
         }
 
-        public void RemoveInspector(Inspector inspector)
+        public void RemoveInspector(Guid inspectorId)
         {
-            using (var context = new ServiceContext())
+            using (var context = new ServiceManagerContext())
             {
-                var inspectorDto = context.Inspectors.SingleOrDefault(i => i.InspectorId == inspector.InspectorId);
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspectorId.ToString());
                 context.Attach(inspectorDto);
                 context.Remove(inspectorDto);
                 context.SaveChanges();
+            }
+        }
+
+        public Inspector GetInspector(Guid inspectorId)
+        {
+            using (var context = new ServiceManagerContext())
+            {
+                var inspectorDto = context.Inspectors.Single(i => i.InspectorId == inspectorId.ToString());
+                return DtoToModel(inspectorDto);
             }
         }
 
@@ -58,7 +67,7 @@ namespace ServiceManager.Persistence
         {
             var inspectorDto = new InspectorDbDto
             {
-                InspectorId = inspector.InspectorId,
+                InspectorId = inspector.InspectorId.ToString(),
                 City = inspector.City,
                 FirstName = inspector.FirstName,
                 LastName = inspector.LastName,
@@ -70,7 +79,7 @@ namespace ServiceManager.Persistence
         private Inspector DtoToModel(InspectorDbDto inspectorDbDto)
         {
             var inspector = new Inspector(inspectorDbDto.FirstName, inspectorDbDto.LastName, inspectorDbDto.City,
-                inspectorDbDto.PhoneNumber, inspectorDbDto.InspectorId);
+                inspectorDbDto.PhoneNumber, Guid.Parse(inspectorDbDto.InspectorId));
             return inspector;
         }
     }

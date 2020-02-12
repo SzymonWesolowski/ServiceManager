@@ -9,12 +9,12 @@ namespace ServiceManager.Domain.Model
     public class DeviceDbDto
     {
         [Key]
-        public  Guid DeviceId { get; set; }
+        public  string DeviceId { get; set; }
         public string DeviceType { get; set; }
         public int ParkPlaces { get; set; }
-        public List<string> ParkPlacesNumbers { get; set; }
+        public string ParkPlacesNumbers { get; set; }
         public string DeviceSerialNumber { get; set; }
-        public DateTime ProductionYear { get; set; }
-        public Guid EstateId { get; set; }
+        public string ProductionYear { get; set; }
+        public string EstateId { get; set; }
     }
 }

@@ -6,18 +6,17 @@ using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application
 {
-    internal interface IEstateOperations
+    public interface IEstateOperations
     {
         List<Estate> GetEstateList();
-        void AddEstate(string name, string city, string street, string postCode, 
-            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId);
-
-        void ModifyEstate(Estate oldEstate, Estate newEstate);
-        void DeleteEstate(Estate estate);
+        void AddEstate(Estate estate);
+        Estate GetEstate(Guid estateGuid);
+        void ModifyEstate(Estate estate);
+        void DeleteEstate(Guid estateId);
 
     }
 
-    class EstateOperations : IEstateOperations
+    public class EstateOperations : IEstateOperations
     {
         private readonly IEstateRepository _estateRepository;
 
@@ -31,21 +30,24 @@ namespace ServiceManager.Application
             return _estateRepository.GetEstateList();
         }
 
-        public void AddEstate(string name, string city, string street, string postCode,
-            bool underContract, DateTime lastInspectionDate, Guid estateId, Guid inspectorId)
+        public void AddEstate(Estate estate)
         {
-            Estate estate = new Estate(name, city, street, postCode, underContract, lastInspectionDate, estateId, inspectorId);
             _estateRepository.AddEstate(estate);
         }
 
-        public void ModifyEstate(Estate oldEstate, Estate newEstate)
+        public Estate GetEstate(Guid estateGuid)
         {
-            _estateRepository.ModifyEstate(oldEstate,newEstate);
+            return _estateRepository.GetEstate(estateGuid);
         }
 
-        public void DeleteEstate(Estate estate)
+        public void ModifyEstate(Estate Estate)
         {
-            _estateRepository.RemoveEstate(estate);
+            _estateRepository.ModifyEstate(Estate);
+        }
+
+        public void DeleteEstate(Guid estateId)
+        {
+            _estateRepository.RemoveEstate(estateId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application.RepositoryInterfaces
@@ -7,7 +8,8 @@ namespace ServiceManager.Application.RepositoryInterfaces
     {
         void AddInspector(Inspector inspector);
         List<Inspector> GetInspectorList();
-        void ModifyInspector(Inspector oldInspector, Inspector newInspector);
-        void RemoveInspector(Inspector inspector);
+        void ModifyInspector(Inspector inspector);
+        void RemoveInspector(Guid inspectorId);
+        Inspector GetInspector(Guid inspectorId);
     }
 }

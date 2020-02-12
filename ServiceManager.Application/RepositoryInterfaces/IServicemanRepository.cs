@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ServiceManager.Domain.Model;
 
 namespace ServiceManager.Application.RepositoryInterfaces
@@ -7,7 +8,8 @@ namespace ServiceManager.Application.RepositoryInterfaces
     {
         void AddServiceman(Serviceman serviceman);
         List<Serviceman> GetServicemanList();
-        void ModifyServiceman(Serviceman oldServiceman, Serviceman newServiceman);
-        void RemoveServiceman(Serviceman serviceman);
+        void ModifyServiceman(Serviceman serviceman);
+        void RemoveServiceman(Guid servicemanId);
+        Serviceman GetServiceman(Guid servicemanId);
     }
 }
