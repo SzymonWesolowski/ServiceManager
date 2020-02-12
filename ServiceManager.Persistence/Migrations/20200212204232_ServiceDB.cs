@@ -16,7 +16,8 @@ namespace ServiceManager.Persistence.Migrations
                     ParkPlacesNumbers = table.Column<string>(nullable: true),
                     DeviceSerialNumber = table.Column<string>(nullable: true),
                     ProductionYear = table.Column<string>(nullable: true),
-                    EstateId = table.Column<string>(nullable: true)
+                    EstateId = table.Column<string>(nullable: true),
+                    LastInspectionDate = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,8 +34,7 @@ namespace ServiceManager.Persistence.Migrations
                     Street = table.Column<string>(nullable: true),
                     PostCode = table.Column<string>(nullable: true),
                     InspectorId = table.Column<string>(nullable: true),
-                    UnderContract = table.Column<bool>(nullable: false),
-                    LastInspectionDate = table.Column<string>(nullable: true)
+                    UnderContract = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,6 +10,6 @@ namespace ServiceManager.Application.RepositoryInterfaces
         List<Device> GetDevices(Guid estateId);
         void ModifyDevice(Device device);
         void DeleteDevice(Device device);
-        Device GetDevice(string deviceId);
+        Device GetDevice(Guid deviceId);
     }
 }

@@ -18,12 +18,12 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public List<InspectionProtocol> GetProtocolList(string deviceSerialNumber)
+        public List<InspectionProtocol> GetProtocolList(Guid deviceId)
         {
             using (var context = new ServiceManagerContext())
             {
                 var protocolDtoList = context.InspectionProtocols
-                    .Where(p => p.DeviceSerialNumber == deviceSerialNumber).ToList();
+                    .Where(p => p.DeviceId == deviceId.ToString()).ToList();
                 var protocolList = new List<InspectionProtocol>();
 
                 foreach (var protocolDto in protocolDtoList)
@@ -75,7 +75,7 @@ namespace ServiceManager.Persistence
                 EstateId = protocol.EstateId.ToString(),
                 IsPositive = protocol.IsPositive,
                 PartsToBeReplaced = protocol.PartsToBeReplaced,
-                ProtocolDate = protocol.ProtocolDate.ToString(),
+                ProtocolDate = protocol.ProtocolDate.ToString("d"),
                 ProtocolId = protocol.ProtocolId.ToString(),
                 ServicemanId = protocol.ServicemanId.ToString()
             };

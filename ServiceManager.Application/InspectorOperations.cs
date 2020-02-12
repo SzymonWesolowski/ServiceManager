@@ -20,10 +20,11 @@ namespace ServiceManager.Application
     {
         private readonly IInspectorRepository _inspectorRepository;
 
-        public InspectorOperations(IInspectorRepository inspectorRepository)
+        public InspectorOperations(IInspectorRepository inspectorRepository, IDeviceRepository deviceRepository)
         {
             _inspectorRepository = inspectorRepository;
         }
+
         public void AddInspector(Inspector inspector)
         {
             _inspectorRepository.AddInspector(inspector);

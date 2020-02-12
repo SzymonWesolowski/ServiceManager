@@ -17,6 +17,5 @@ namespace ServiceManager.Domain.Model
         public string PostCode { get; set; }
         public string InspectorId { get; set; }
         public bool UnderContract { get; set; }
-        public string LastInspectionDate { get; set; }
     }
 }

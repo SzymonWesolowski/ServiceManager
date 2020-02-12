@@ -5,14 +5,13 @@ namespace ServiceManager.Domain.Model
     public class Estate
     {
         public Estate(string name, string city, string street, string postCode, bool underContract,
-            DateTime lastInspectionDate, Guid estateId, Guid? inspectorId)
+             Guid estateId, Guid? inspectorId)
         {
             Name = name;
             City = city;
             Street = street;
             PostCode = postCode;
             UnderContract = underContract;
-            LastInspectionDate = lastInspectionDate;
             EstateId = estateId;
             InspectorId = inspectorId;
         }
@@ -23,7 +22,6 @@ namespace ServiceManager.Domain.Model
         public string PostCode { get; }
         public Guid?  InspectorId { get; }
         public bool UnderContract { get; }
-        public DateTime LastInspectionDate { get; }
         public Guid EstateId { get; }
     }
 }

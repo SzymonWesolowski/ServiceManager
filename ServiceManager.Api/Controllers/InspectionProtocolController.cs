@@ -21,9 +21,9 @@ namespace ServiceManager.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<InspectionProtocol>> GetInspectionProtocolList([FromBody]string deviceSerialNumber)
+        public ActionResult<List<InspectionProtocol>> GetInspectionProtocolList([FromBody]Guid deviceId)
         {
-            return Ok(_inspectionProtocolOperations.GetInspectionProtocolList(deviceSerialNumber));
+            return Ok(_inspectionProtocolOperations.GetInspectionProtocolList(deviceId));
         }
 
         [HttpDelete]

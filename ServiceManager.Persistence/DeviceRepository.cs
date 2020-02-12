@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ServiceManager.Application;
 using ServiceManager.Application.RepositoryInterfaces;
 using ServiceManager.Domain.Model;
 
@@ -57,11 +55,11 @@ namespace ServiceManager.Persistence
             }
         }
 
-        public Device GetDevice(string deviceId)
+        public Device GetDevice(Guid deviceId)
         {
             using (var context = new ServiceManagerContext())
             {
-                var deviceDto = context.Devices.Single(d => d.DeviceId == deviceId);
+                var deviceDto = context.Devices.Single(d => d.DeviceId == deviceId.ToString());
                 return DtoToModel(deviceDto);
             }
         }
@@ -74,8 +72,9 @@ namespace ServiceManager.Persistence
             deviceDto.EstateId = device.EstateId.ToString();
             deviceDto.ParkPlaces = device.ParkPlaces;
             deviceDto.ParkPlacesNumbers = device.ParkPlacesNumbers;
-            deviceDto.ProductionYear = device.ProductionYear.ToString();
+            deviceDto.ProductionYear = device.ProductionYear.ToString("d");
             deviceDto.DeviceId = device.DeviceId.ToString();
+            deviceDto.LastInspectionDate = device.LastInspectionDate.ToString("d");
             return deviceDto;
         }
 
@@ -83,7 +82,7 @@ namespace ServiceManager.Persistence
         {
             var device = new Device(deviceDbDto.DeviceType, deviceDbDto.ParkPlaces, deviceDbDto.ParkPlacesNumbers,
                 deviceDbDto.DeviceSerialNumber, DateTime.Parse(deviceDbDto.ProductionYear),Guid.Parse(deviceDbDto.EstateId),
-                Guid.Parse(deviceDbDto.DeviceId));
+                Guid.Parse(deviceDbDto.DeviceId), DateTime.Parse(deviceDbDto.LastInspectionDate));
             return device;
         }
     }

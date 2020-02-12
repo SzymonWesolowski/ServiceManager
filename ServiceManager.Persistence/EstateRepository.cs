@@ -71,7 +71,6 @@ namespace ServiceManager.Persistence
                 {
                     EstateId = estate.EstateId.ToString(),
                     City = estate.City,
-                    LastInspectionDate = estate.LastInspectionDate.ToString(),
                     Name = estate.Name,
                     PostCode = estate.PostCode,
                     Street = estate.Street,
@@ -89,15 +88,12 @@ namespace ServiceManager.Persistence
             if (estateDbDto.InspectorId != null)
             {
                 return new Estate(estateDbDto.Name, estateDbDto.City, estateDbDto.Street, estateDbDto.PostCode,
-                    estateDbDto.UnderContract, DateTime.Parse(estateDbDto.LastInspectionDate),
-                    Guid.Parse(estateDbDto.EstateId),
+                    estateDbDto.UnderContract, Guid.Parse(estateDbDto.EstateId),
                     Guid.Parse(estateDbDto.InspectorId));
             }
 
             return new Estate(estateDbDto.Name, estateDbDto.City, estateDbDto.Street, estateDbDto.PostCode,
-                estateDbDto.UnderContract, DateTime.Parse(estateDbDto.LastInspectionDate),
-                Guid.Parse(estateDbDto.EstateId),
-                null);
+                estateDbDto.UnderContract, Guid.Parse(estateDbDto.EstateId), null);
         }
     }
 }

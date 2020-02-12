@@ -26,6 +26,8 @@ namespace ServiceManager.Persistence.Migrations
 
                     b.Property<string>("EstateId");
 
+                    b.Property<string>("LastInspectionDate");
+
                     b.Property<int>("ParkPlaces");
 
                     b.Property<string>("ParkPlacesNumbers");
@@ -45,8 +47,6 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("City");
 
                     b.Property<string>("InspectorId");
-
-                    b.Property<string>("LastInspectionDate");
 
                     b.Property<string>("Name");
 

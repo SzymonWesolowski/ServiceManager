@@ -8,7 +8,7 @@ using ServiceManager.Persistence;
 namespace ServiceManager.Persistence.Migrations
 {
     [DbContext(typeof(ServiceManagerContext))]
-    [Migration("20200211153103_ServiceDB")]
+    [Migration("20200212204232_ServiceDB")]
     partial class ServiceDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,8 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("DeviceType");
 
                     b.Property<string>("EstateId");
+
+                    b.Property<string>("LastInspectionDate");
 
                     b.Property<int>("ParkPlaces");
 
@@ -47,8 +49,6 @@ namespace ServiceManager.Persistence.Migrations
                     b.Property<string>("City");
 
                     b.Property<string>("InspectorId");
-
-                    b.Property<string>("LastInspectionDate");
 
                     b.Property<string>("Name");
 

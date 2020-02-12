@@ -6,7 +6,7 @@ namespace ServiceManager.Domain.Model
     public class Device
     {
         public Device(string deviceType, int parkPlaces, string parkPlacesNumbers, string deviceSerialNumber,
-            DateTime productionYear, Guid estateId, Guid deviceId)
+            DateTime productionYear, Guid estateId, Guid deviceId, DateTime lastInspectionDate)
         {
             DeviceType = deviceType;
             ParkPlaces = parkPlaces;
@@ -15,6 +15,7 @@ namespace ServiceManager.Domain.Model
             ProductionYear = productionYear;
             EstateId = estateId;
             DeviceId = deviceId;
+            LastInspectionDate = lastInspectionDate;
         }
 
         public string DeviceType { get; }
@@ -24,5 +25,6 @@ namespace ServiceManager.Domain.Model
         public DateTime ProductionYear { get; }
         public Guid EstateId { get; }
         public Guid DeviceId { get; }
+        public DateTime LastInspectionDate { get; }
     }
 }

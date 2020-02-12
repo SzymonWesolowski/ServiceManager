@@ -75,7 +75,7 @@ namespace ServiceManager.Persistence
                 EstateId = protocol.EstateId.ToString(),
                 IsPositive = protocol.IsPositive,
                 PartsToBeReplaced = protocol.PartsToBeReplaced,
-                ProtocolDate = protocol.ProtocolDate.ToString(),
+                ProtocolDate = protocol.ProtocolDate.ToString("d"),
                 ProtocolId = protocol.ProtocolId.ToString(),
                 ServicemanId = protocol.ServicemanId.ToString(),
                 PartsReplaced = protocol.PartsReplaced

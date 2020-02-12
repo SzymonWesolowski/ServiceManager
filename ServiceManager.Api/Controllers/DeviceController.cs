@@ -34,7 +34,7 @@ namespace ServiceManager.Api.Controllers
         public ActionResult AddDevice([FromBody]Device device)
         {
             _deviceOperations.AddDevice(device);
-            return Created(new Uri("http://localhost:49460/api/device/" + device.DeviceId), _deviceOperations.GetDevice(device.DeviceId.ToString()));
+            return Created(new Uri("http://localhost:49460/api/device/" + device.DeviceId), _deviceOperations.GetDevice(device.DeviceId));
         }
 
         [HttpPut]

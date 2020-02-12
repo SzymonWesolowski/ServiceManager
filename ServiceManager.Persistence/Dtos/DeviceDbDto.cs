@@ -16,5 +16,6 @@ namespace ServiceManager.Domain.Model
         public string DeviceSerialNumber { get; set; }
         public string ProductionYear { get; set; }
         public string EstateId { get; set; }
+        public string LastInspectionDate { get; set; }
     }
 }

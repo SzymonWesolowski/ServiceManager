@@ -13,7 +13,7 @@ namespace ServiceManager.Application
         List<Device> GetDeviceList(Guid estateId);
         void RemoveDevice(Device device);
         void RemoveDeviceList(List<Device> devices);
-        Device GetDevice(string deviceId);
+        Device GetDevice(Guid deviceId);
         void ModifyDevice(Device device);
     }
 
@@ -57,7 +57,7 @@ namespace ServiceManager.Application
             }
         }
 
-        public Device GetDevice(string deviceId)
+        public Device GetDevice(Guid deviceId)
         {
             return _deviceRepository.GetDevice(deviceId);
         }
