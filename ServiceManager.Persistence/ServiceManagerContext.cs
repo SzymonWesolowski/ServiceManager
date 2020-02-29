@@ -16,7 +16,8 @@ namespace ServiceManager.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("FileName = ./ServiceDB.db");
+            optionsBuilder.UseSqlServer(
+                @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = ServiceManager; Integrated Security = True;");
             base.OnConfiguring(optionsBuilder);
         }
     }

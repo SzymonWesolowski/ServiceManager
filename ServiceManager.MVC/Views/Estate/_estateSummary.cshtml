@@ -1,0 +1,24 @@
+﻿@model ServiceManager.MVC.Models.EstateViewModel
+
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Street)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PostCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.UnderContract)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new {id = @Model.EstateId}) |
+        @Html.ActionLink("Details", "Details", new {id = @Model.EstateId}) |
+        @Html.ActionLink("Delete", "Delete", new {id = @Model.EstateId})
+    </td>
+</tr>

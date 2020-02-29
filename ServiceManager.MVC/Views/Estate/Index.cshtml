@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ServiceManager.MVC.Models.EstateViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCode)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UnderContract)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    @foreach (var item in Model)
+    {
+
+        @Html.Partial("_estateSummary", item)
+    }
+    
+    </tbody>
+</table>

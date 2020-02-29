@@ -59,7 +59,7 @@ namespace ServiceManager.Persistence
         {
             using (var context = new ServiceManagerContext())
             {
-                var estateDto = context.Estates.FirstOrDefault(e => e.EstateId == estateGuid.ToString());
+                var estateDto = context.Estates.First(e => e.EstateId == estateGuid.ToString());
                 return DtoToModel(estateDto);
             }
         }

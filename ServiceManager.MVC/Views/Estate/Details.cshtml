@@ -1,0 +1,60 @@
+﻿@model ServiceManager.MVC.Models.EstateViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PostCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectorId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InspectorId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnderContract)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnderContract)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstateId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstateId)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.EstateId }) |
+    <a asp-action="Index">Back to List</a>
+</div>
